@@ -45,3 +45,7 @@
 .status-dnd {
     -fx-fill: #F85149;
 }
+
+.dashboard-background {
+    -fx-background-color: blue;
+}
