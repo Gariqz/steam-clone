@@ -1,0 +1,12 @@
+# Mengabaikan folder hasil build Maven
+target/
+
+# Mengabaikan pengaturan lokal VS Code masing-masing orang
+.vscode/
+
+# Mengabaikan file sistem sampah dari macOS lu biar gak nyampah di laptop temen
+.DS_Store
+
+# Mengabaikan file Java yang udah ter-compile otomatis
+*.class
+*.log
