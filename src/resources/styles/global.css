@@ -1,0 +1,47 @@
+.root {
+    -fx-background-color: #12161A;
+    -fx-font-family: "Inter", "Roboto", "Segoe UI", sans-serif;
+}
+
+.sidebar {
+    -fx-background-color: #1C2128;
+}
+
+.panel-card {
+    -fx-background-color: #252C35;
+    -fx-background-radius: 8px;
+}
+
+.text-primary {
+    -fx-text-fill: #E1E7EC;
+}
+
+.text-secondary {
+    -fx-text-fill: #8B949E;
+}
+
+.btn-primary {
+    -fx-background-color: #00E5FF;
+    -fx-text-fill: #12161A;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4px;
+    -fx-padding: 8px 16px;
+    -fx-cursor: hand;
+}
+
+.btn-primary:hover {
+    -fx-background-color: #9D4EDD;
+    -fx-text-fill: #E1E7EC;
+}
+
+.status-online {
+    -fx-fill: #23D18B;
+}
+
+.status-ingame {
+    -fx-fill: #388BFD;
+}
+
+.status-dnd {
+    -fx-fill: #F85149;
+}
