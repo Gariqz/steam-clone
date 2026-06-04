@@ -8,8 +8,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -27,7 +29,7 @@
                </VBox.margin>
             </Label>
             
-            <Button alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #2a475e; -fx-text-fill: white;" text="🛒 Store">
+            <Button fx:id="storeButton" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #2a475e; -fx-text-fill: white;" text="🛒 Store">
                <font><Font size="14.0" /></font>
             </Button>
             <Button alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #c7d5e0;" text="📚 Library">
@@ -113,8 +115,8 @@
                                           <Image url="@../images/dota2_card.png" />
                                        </image>
                                     </ImageView>
-                                    <Label text="Dota 2" textFill="WHITE"><font><Font name="System Bold" size="14.0"/></font></Label>
-                                    <Label text="Free to Play" textFill="#a1a1a1"/>
+                                    <Label text="Dota 2" textFill="WHITE"><font><Font name="System Bold" size="14.0" /></font></Label>
+                                    <Label text="Free to Play" textFill="#a1a1a1" />
                                  </children>
                               </VBox>
                               
@@ -128,8 +130,8 @@
                                           <Image url="@../images/cyberpunk_card.png" />
                                        </image>
                                     </ImageView>
-                                    <Label text="Cyberpunk 2077" textFill="WHITE"><font><Font name="System Bold" size="14.0"/></font></Label>
-                                    <Label text="Rp 699.000" textFill="#66c0f4"/>
+                                    <Label text="Cyberpunk 2077" textFill="WHITE"><font><Font name="System Bold" size="14.0" /></font></Label>
+                                    <Label text="Rp 699.000" textFill="#66c0f4" />
                                  </children>
                               </VBox>
 
@@ -143,11 +145,19 @@
                                           <Image url="@../images/gtav_card.png" />
                                        </image>
                                     </ImageView>
-                                    <Label text="GTA V" textFill="WHITE"><font><Font name="System Bold" size="14.0"/></font></Label>
-                                    <Label text="Rp 400.000" textFill="#66c0f4"/>
+                                    <Label text="GTA V" textFill="WHITE"><font><Font name="System Bold" size="14.0" /></font></Label>
+                                    <Label text="Rp 400.000" textFill="#66c0f4" />
                                  </children>
                               </VBox>
                            </children>
+                           <columnConstraints>
+                              <ColumnConstraints />
+                              <ColumnConstraints />
+                              <ColumnConstraints />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints />
+                           </rowConstraints>
                         </GridPane>
 
                      </children>

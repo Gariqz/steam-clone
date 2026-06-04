@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import utils.DatabaseConnection;
+import utils.SceneNavigator; // Pastikan di-import kalau SceneNavigator beda package
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -54,14 +55,22 @@ public class LoginController {
                 // Tarik data email dari database sekadar buat contoh
                 String emailUser = rs.getString("email");
                 
+                // Pop-up ini akan menahan thread sebentar sampai user klik "OK"
                 showAlert(Alert.AlertType.INFORMATION, "Login Sukses", 
                         "Selamat datang kembali, " + username + "!\nEmail: " + emailUser);
                 
-                // TODO: Logika untuk menutup halaman login dan membuka Dashboard.fxml
+                // 6. EKSEKUSI PINDAH KE DASHBOARD
+                // Arahkan ke file FXML Dashboard abang (sesuaikan ukurannya ke 950x600 biar pas)
+                SceneNavigator.switchTo("/views/Dashboard.fxml", "Steam Clone - Dashboard", 950, 600);
                 
             } else {
                 showAlert(Alert.AlertType.ERROR, "Login Gagal", "Username atau Password yang Anda masukkan salah!");
             }
+
+            // Bagian menutup resource SQL (Good Practice)
+            rs.close();
+            ps.close();
+            kon.close();
 
         } catch (Exception e) {
             showAlert(Alert.AlertType.ERROR, "System Error", "Terjadi kesalahan: " + e.getMessage());
@@ -74,6 +83,6 @@ public class LoginController {
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
-        alert.showAndWait();
+        alert.showAndWait(); // Menunggu sampai user klik tombol OK/Close
     }
 }
