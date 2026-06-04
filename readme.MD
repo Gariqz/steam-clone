@@ -34,7 +34,7 @@ java -version
 mvn -v
 ```
 
-2. Setup VS Code
+## 2. Setup VS Code
 
 Biar VS Code kita fiturnya lengkap buat ngerjain Java, install extension ini dulu:
 
@@ -47,7 +47,8 @@ Biar VS Code kita fiturnya lengkap buat ngerjain Java, install extension ini dul
 ```
 
 Kalo udah pada di-install, tekan Ctrl + Shift + P (di Mac Cmd + Shift + P), ketik Java: Clean Workspace, terus pilih Restart and Delete. Ini biar VS Code ngebaca struktur folder kita dengan bener dari awal.
-3. Cara Nge-Run Project
+
+## 3. Cara Nge-Run Project
 
 PENTING: Jangan pencet tombol "Run" atau icon Play biasa yang ada di VS Code! Project kita diikat pake Maven, jadi run-nya wajib lewat terminal.
 
@@ -57,7 +58,7 @@ Buka terminal bawaan VS Code (tekan Ctrl + `), terus ketik perintah sakti ini:
 mvn clean javafx:run
 ```
 
-4. Rules Pengerjaan Tim
+## 4. Rules Pengerjaan Tim
 
     Testing UI: Kalo lagi bikin page baru dan mau ngetes tampilannya, ganti rutenya di file Main.java ya.
 
