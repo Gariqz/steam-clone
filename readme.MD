@@ -1,28 +1,28 @@
-🎮 Steam Clone - JavaFX Project Setup Guide
+# 🎮 Steam Clone Project - Setup Guide
 
-Selamat datang di repository Steam Clone! Biar kita berempat bisa coding bareng dengan lancar tanpa error di VS Code masing-masing, wajib ikuti langkah-langkah setup di bawah ini sebelum mulai ngoding.
-1. Persiapan Senjata (Instalasi Wajib)
+Halo tim! Biar pengerjaan tugas besar kita aman sentosa, ga pada pusing *setting* environment, dan kodenya ga bentrok pas digabung, tolong ikutin panduan *setup* ini dulu ya sebelum mulai ngoding.
 
-Kita menggunakan Java JDK 17 dan Apache Maven sebagai pondasi utama.
+## 1. Persiapan Install (Wajib)
 
-🍎 Untuk Pengguna macOS:
-Buka Terminal dan jalankan perintah Homebrew ini:
-Bash
+Kita butuh **Java JDK 17** sama **Maven** sebagai pondasi utamanya.
 
+🍎 **Buat yang pake Mac:**
+Buka Terminal terus jalanin command ini:
+```bash
 brew install openjdk@17
 brew install maven
 
-🪟 Untuk Pengguna Windows:
-Buka Command Prompt (Run as Administrator) dan jalankan perintah Winget ini:
+🪟 Buat yang pake Windows:
+Buka Command Prompt (wajib Run as Administrator), terus jalanin:
 DOS
 
 winget install Microsoft.OpenJDK.17
 winget install Apache.Maven
 
-(Alternatif Windows: Kalian bisa download manual installer JDK 17 dan Maven dari situs resminya, lalu set Environment Variables / System Path).
+(Kalo winget lu error, download manual aja installer JDK 17 sama Maven dari web resminya, terus jangan lupa masukin ke System Path / Environment Variables).
 
-Cek Keberhasilan Instalasi:
-Buka terminal baru, pastikan dua perintah ini memunculkan versi aplikasi (tidak error):
+✅ Cara Cek Kalo Udah Berhasil:
+Buka terminal baru, ketik ini buat mastiin ga ada error:
 Bash
 
 java -version
@@ -30,20 +30,28 @@ mvn -v
 
 2. Setup VS Code
 
-Biar VS Code kita sekuat IDE berat, wajib install ekstensi berikut:
+Biar VS Code kita fiturnya lengkap buat ngerjain Java, install extension ini dulu:
 
-    Extension Pack for Java (oleh Microsoft)
+    Extension Pack for Java (dari Microsoft)
 
-    JavaFX Support (oleh redhat / vscjava)
+    JavaFX Support (dari redhat / vscjava)
 
-    Scene Builder (Aplikasi terpisah dari Gluonhq.com, instal di OS kalian masing-masing untuk drag-and-drop UI FXML).
+    Scene Builder (Ini aplikasi misah ya, wajib download di web Gluonhq.com buat drag-and-drop UI-nya).
 
-Setelah instal ekstensi, tekan Ctrl + Shift + P (atau Cmd + Shift + P), ketik Java: Clean Workspace, dan pilih Restart and Delete biar VS Code ngebaca struktur folder kita dengan benar.
-3. Cara Menjalankan Project
+Kalo udah pada di-install, tekan Ctrl + Shift + P (di Mac Cmd + Shift + P), ketik Java: Clean Workspace, terus pilih Restart and Delete. Ini biar VS Code ngebaca struktur folder kita dengan bener dari awal.
+3. Cara Nge-Run Project
 
-Jangan gunakan tombol "Run" atau ikon Play biasa di VS Code! Proyek kita diikat menggunakan Maven.
+PENTING: Jangan pencet tombol "Run" atau icon Play biasa yang ada di VS Code! Project kita diikat pake Maven, jadi run-nya wajib lewat terminal.
 
-Buka terminal terintegrasi di VS Code (`Ctrl + ``), lalu ketik perintah sakti ini:
+Buka terminal bawaan VS Code (tekan Ctrl + `), terus ketik perintah sakti ini:
 Bash
 
 mvn clean javafx:run
+
+4. Rules Pengerjaan Tim
+
+    Testing UI: Kalo lagi bikin page baru dan mau ngetes tampilannya, ganti rutenya di file Main.java ya.
+
+    Edit Desain: Semua file desain (.fxml) usahain diedit lewat Scene Builder aja, atau pake struktur VBox/HBox biar otomatis rata tengah (jangan pake kordinat absolut).
+
+    Kalo Error: Misal pas nge-run nemu error Exit Value 1, tambahin flag -e di belakang command (jadi mvn clean javafx:run -e) buat liat log error aslinya.
