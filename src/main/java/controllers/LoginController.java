@@ -2,8 +2,14 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import utils.DatabaseConnection;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class LoginController {
 
@@ -17,11 +23,57 @@ public class LoginController {
     private void handleLoginBtn(ActionEvent event) {
         String username = txtUsername.getText();
         String password = txtPassword.getText();
-        
-        System.out.println("Tombol Login Diklik!");
-        System.out.println("Username: " + username);
-        System.out.println("Password: " + password);
-        
-        // Nanti logika nyambungin ke MySQL taruh di sini
+
+        // Validasi input kosong (UX dasar)
+        if (username.isEmpty() || password.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Peringatan", "Username dan Password tidak boleh kosong!");
+            return;
+        }
+
+        try {
+            // 1. Buka Koneksi
+            Connection kon = DatabaseConnection.getConnection();
+            if (kon == null) {
+                showAlert(Alert.AlertType.ERROR, "Koneksi Error", "Gagal menyambung ke database sistem.");
+                return;
+            }
+
+            // 2. Siapkan Peluru Query
+            String query = "SELECT * FROM user WHERE username = ? AND password = ?";
+            PreparedStatement ps = kon.prepareStatement(query);
+            
+            // 3. Masukkan Data ke Titik Tanya (?)
+            ps.setString(1, username);
+            ps.setString(2, password);
+
+            // 4. Tarik Pelatuknya
+            ResultSet rs = ps.executeQuery();
+
+            // 5. Cek Hasilnya
+            if (rs.next()) {
+                // Tarik data email dari database sekadar buat contoh
+                String emailUser = rs.getString("email");
+                
+                showAlert(Alert.AlertType.INFORMATION, "Login Sukses", 
+                        "Selamat datang kembali, " + username + "!\nEmail: " + emailUser);
+                
+                // TODO: Logika untuk menutup halaman login dan membuka Dashboard.fxml
+                
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Login Gagal", "Username atau Password yang Anda masukkan salah!");
+            }
+
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "System Error", "Terjadi kesalahan: " + e.getMessage());
+        }
+    }
+
+    // Method helper untuk mempersingkat penulisan pop-up Alert
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
