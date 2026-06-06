@@ -14,56 +14,72 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane prefHeight="600.0" prefWidth="950.0" style="-fx-background-color: #1b2838;" stylesheets="@../styles/global.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DashboardController">
+<BorderPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #1b2838;" stylesheets="@../styles/global.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DashboardController">
    
    <left>
       <VBox prefWidth="220.0" spacing="15.0" style="-fx-background-color: #171a21;" BorderPane.alignment="CENTER">
          <children>
             <Label text="STEAM CLONE" textFill="#66c0f4">
-               <font>
-                  <Font name="System Bold" size="22.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="20.0" />
-               </VBox.margin>
+               <font><Font name="System Bold" size="22.0" /></font>
+               <VBox.margin><Insets bottom="20.0" /></VBox.margin>
             </Label>
             
-            <Button fx:id="storeButton" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #2a475e; -fx-text-fill: white;" text="🛒 Store">
+            <Button onAction="#goToStore" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #2a475e; -fx-text-fill: white;" text="Store">
+               <graphic><FontIcon iconLiteral="fas-shopping-cart" iconColor="WHITE" /></graphic>
                <font><Font size="14.0" /></font>
             </Button>
-            <Button alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #c7d5e0;" text="📚 Library">
+            <Button onAction="#goToLibrary" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #c7d5e0;" text="Library">
+               <graphic><FontIcon iconLiteral="fas-book" iconColor="#c7d5e0" /></graphic>
                <font><Font size="14.0" /></font>
             </Button>
-            <Button alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #c7d5e0;" text="👤 Profile">
+            <Button onAction="#goToProfile" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #c7d5e0;" text="Profile">
+               <graphic><FontIcon iconLiteral="fas-user" iconColor="#c7d5e0" /></graphic>
+               <font><Font size="14.0" /></font>
+            </Button>
+            <Button onAction="#goToWallet" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #c7d5e0;" text="Wallet">
+               <graphic><FontIcon iconLiteral="fas-wallet" iconColor="#c7d5e0" /></graphic>
                <font><Font size="14.0" /></font>
             </Button>
             
-            <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS" />
+            <VBox VBox.vgrow="ALWAYS" />
             
-            <Button fx:id="btnLogout" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogout" style="-fx-background-color: #a32a2a; -fx-text-fill: white;" text="🚪 Logout" />
+            <Button onAction="#handleLogout" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #a32a2a; -fx-text-fill: white;" text="Logout">
+               <graphic><FontIcon iconLiteral="fas-sign-out-alt" iconColor="WHITE" /></graphic>
+            </Button>
          </children>
-         <padding>
-            <Insets bottom="20.0" left="15.0" right="15.0" top="30.0" />
-         </padding>
+         <padding><Insets bottom="20.0" left="15.0" right="15.0" top="30.0" /></padding>
       </VBox>
    </left>
 
    <center>
       <VBox spacing="20.0" BorderPane.alignment="CENTER">
-         <padding>
-            <Insets bottom="20.0" left="25.0" right="25.0" top="20.0" />
-         </padding>
+         <padding><Insets bottom="20.0" left="25.0" right="25.0" top="20.0" /></padding>
          <children>
             
             <HBox alignment="CENTER_LEFT" spacing="15.0">
                <children>
-                  <TextField promptText="Search games..." style="-fx-background-color: #2a475e; -fx-text-fill: white; -fx-prompt-text-fill: #66c0f4;" HBox.hgrow="ALWAYS" />
-                  <Label text="Halo, Hilmi!" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
+                  <TextField fx:id="txtSearch" onKeyReleased="#handleSearch" promptText="Search games by title, category, or price..." style="-fx-background-color: #2a475e; -fx-text-fill: white; -fx-prompt-text-fill: #66c0f4;" HBox.hgrow="ALWAYS" />
+                  <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                     <children>
+                        <VBox alignment="CENTER_RIGHT">
+                           <children>
+                              <Label fx:id="lblUsername" text="User" textFill="WHITE">
+                                 <font><Font name="System Bold" size="14.0" /></font>
+                              </Label>
+                              <Label fx:id="lblWalletBalance" text="Balance: Rp 0" textFill="#66c0f4">
+                                 <font><Font size="12.0" /></font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <ImageView fx:id="imgNavAvatar" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/default_avatar.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
                </children>
             </HBox>
             
@@ -71,95 +87,18 @@
                <content>
                   <VBox spacing="20.0">
                      <children>
-                        
-                        <HBox alignment="CENTER_LEFT" prefHeight="200.0" spacing="20.0" style="-fx-background-color: linear-gradient(to right, #051923, #003554); -fx-background-radius: 8;">
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                           <children>
-                              <ImageView fitHeight="180.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/cs2_banner.png" />
-                                 </image>
-                              </ImageView>
-                              
-                              <VBox spacing="5.0" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Label style="-fx-background-color: #66c0f4; -fx-text-fill: #171a21; -fx-background-radius: 3;" text=" FEATURED &amp; RECOMMENDED ">
-                                       <font><Font name="System Bold" size="10.0" /></font>
-                                    </Label>
-                                    <Label text="Counter-Strike 2" textFill="WHITE">
-                                       <font><Font name="System Bold" size="28.0" /></font>
-                                       <VBox.margin><Insets top="10.0" /></VBox.margin>
-                                    </Label>
-                                    <Label text="Play for Free Now!" textFill="#66c0f4" />
-                                 </children>
-                                 <padding><Insets top="20.0" /></padding>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        
-                        <Label text="Trending Games" textFill="WHITE">
+                        <Label text="Store Catalog" textFill="WHITE">
                            <font><Font name="System Bold" size="18.0" /></font>
                         </Label>
                         
-                        <GridPane hgap="15.0" vgap="15.0">
-                           <children>
-                              <VBox prefWidth="200.0" spacing="5.0" style="-fx-background-color: #171a21; -fx-background-radius: 5;" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                                 <children>
-                                    <ImageView fitHeight="110.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../images/dota2_card.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Label text="Dota 2" textFill="WHITE"><font><Font name="System Bold" size="14.0" /></font></Label>
-                                    <Label text="Free to Play" textFill="#a1a1a1" />
-                                 </children>
-                              </VBox>
-                              
-                              <VBox prefWidth="200.0" spacing="5.0" style="-fx-background-color: #171a21; -fx-background-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                                 <children>
-                                    <ImageView fitHeight="110.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../images/cyberpunk_card.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Label text="Cyberpunk 2077" textFill="WHITE"><font><Font name="System Bold" size="14.0" /></font></Label>
-                                    <Label text="Rp 699.000" textFill="#66c0f4" />
-                                 </children>
-                              </VBox>
-
-                              <VBox prefWidth="200.0" spacing="5.0" style="-fx-background-color: #171a21; -fx-background-radius: 5;" GridPane.columnIndex="2" GridPane.rowIndex="0">
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                                 <children>
-                                    <ImageView fitHeight="110.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../images/gtav_card.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Label text="GTA V" textFill="WHITE"><font><Font name="System Bold" size="14.0" /></font></Label>
-                                    <Label text="Rp 400.000" textFill="#66c0f4" />
-                                 </children>
-                              </VBox>
-                           </children>
+                        <GridPane fx:id="gameGrid" hgap="15.0" vgap="15.0">
                            <columnConstraints>
-                              <ColumnConstraints />
-                              <ColumnConstraints />
-                              <ColumnConstraints />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                            </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints />
-                           </rowConstraints>
                         </GridPane>
-
                      </children>
                   </VBox>
                </content>

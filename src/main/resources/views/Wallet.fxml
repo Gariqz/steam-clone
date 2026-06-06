@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #1b2838;" stylesheets="@../styles/global.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WalletController">
+   <left>
+      <VBox prefWidth="220.0" spacing="15.0" style="-fx-background-color: #171a21;" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="STEAM CLONE" textFill="#66c0f4">
+               <font><Font name="System Bold" size="22.0" /></font>
+               <VBox.margin><Insets bottom="20.0" /></VBox.margin>
+            </Label>
+            <Button onAction="#goToStore" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #c7d5e0;" text="Store">
+               <graphic><FontIcon iconLiteral="fas-shopping-cart" iconColor="#c7d5e0" /></graphic>
+               <font><Font size="14.0" /></font>
+            </Button>
+            <Button onAction="#goToLibrary" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #c7d5e0;" text="Library">
+               <graphic><FontIcon iconLiteral="fas-book" iconColor="#c7d5e0" /></graphic>
+               <font><Font size="14.0" /></font>
+            </Button>
+            <Button onAction="#goToProfile" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #c7d5e0;" text="Profile">
+               <graphic><FontIcon iconLiteral="fas-user" iconColor="#c7d5e0" /></graphic>
+               <font><Font size="14.0" /></font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #2a475e; -fx-text-fill: white;" text="Wallet">
+               <graphic><FontIcon iconLiteral="fas-wallet" iconColor="WHITE" /></graphic>
+               <font><Font size="14.0" /></font>
+            </Button>
+            <VBox VBox.vgrow="ALWAYS" />
+            <Button onAction="#handleLogout" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #a32a2a; -fx-text-fill: white;" text="Logout">
+               <graphic><FontIcon iconLiteral="fas-sign-out-alt" iconColor="WHITE" /></graphic>
+            </Button>
+         </children>
+         <padding><Insets bottom="20.0" left="15.0" right="15.0" top="30.0" /></padding>
+      </VBox>
+   </left>
+
+   <center>
+      <VBox spacing="30.0" BorderPane.alignment="CENTER">
+         <padding><Insets bottom="40.0" left="40.0" right="40.0" top="40.0" /></padding>
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="15.0">
+               <children>
+                  <Label text="WALLET &amp; VOUCHERS" textFill="WHITE" HBox.hgrow="ALWAYS">
+                     <font><Font name="System Bold" size="24.0" /></font>
+                  </Label>
+                  <HBox alignment="CENTER_RIGHT" spacing="10.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <VBox alignment="CENTER_RIGHT">
+                           <children>
+                              <Label fx:id="lblUsername" text="User" textFill="WHITE">
+                                 <font><Font name="System Bold" size="14.0" /></font>
+                              </Label>
+                              <Label fx:id="lblWalletBalance" text="Balance: Rp 0" textFill="#66c0f4">
+                                 <font><Font size="12.0" /></font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <ImageView fx:id="imgNavAvatar" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/default_avatar.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+
+            <VBox spacing="10.0" style="-fx-background-color: #171a21; -fx-background-radius: 8;">
+               <padding><Insets bottom="20.0" left="25.0" right="25.0" top="20.0" /></padding>
+               <children>
+                  <Label text="YOUR CURRENT BALANCE" textFill="#66c0f4">
+                     <font><Font name="System Bold" size="14.0" /></font>
+                  </Label>
+                  <Label fx:id="lblBalance" text="Rp 0" textFill="WHITE">
+                     <font><Font name="System Bold" size="36.0" /></font>
+                  </Label>
+               </children>
+            </VBox>
+
+            <HBox spacing="30.0">
+               <children>
+                  <VBox spacing="20.0" style="-fx-background-color: #171a21; -fx-background-radius: 8;" HBox.hgrow="ALWAYS">
+                     <padding><Insets bottom="25.0" left="25.0" right="25.0" top="20.0" /></padding>
+                     <children>
+                        <Label text="BUY VOUCHER" textFill="WHITE">
+                           <font><Font name="System Bold" size="18.0" /></font>
+                        </Label>
+                        <Label text="Select a nominal to generate a voucher:" textFill="#a1a1a1" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <Button onAction="#handleGenerateVoucher" prefWidth="120.0" style="-fx-background-color: #2a475e; -fx-text-fill: white;" text="Rp 50,000" userData="50000" />
+                              <Button onAction="#handleGenerateVoucher" prefWidth="120.0" style="-fx-background-color: #2a475e; -fx-text-fill: white;" text="Rp 100,000" userData="100000" />
+                              <Button onAction="#handleGenerateVoucher" prefWidth="120.0" style="-fx-background-color: #2a475e; -fx-text-fill: white;" text="Rp 200,000" userData="200000" />
+                           </children>
+                        </HBox>
+                        <HBox spacing="10.0">
+                           <children>
+                              <Button onAction="#handleGenerateVoucher" prefWidth="120.0" style="-fx-background-color: #2a475e; -fx-text-fill: white;" text="Rp 500,000" userData="500000" />
+                              <Button onAction="#handleGenerateVoucher" prefWidth="120.0" style="-fx-background-color: #2a475e; -fx-text-fill: white;" text="Rp 1,000,000" userData="1000000" />
+                              <Button onAction="#handleGenerateVoucher" prefWidth="120.0" style="-fx-background-color: #2a475e; -fx-text-fill: white;" text="Rp 2,500,000" userData="2500000" />
+                           </children>
+                        </HBox>
+                        
+                        <VBox fx:id="vboxVoucherResult" alignment="CENTER" spacing="10.0" visible="false">
+                           <children>
+                              <ProgressIndicator fx:id="progressLoading" prefHeight="40.0" prefWidth="40.0" />
+                              <Label fx:id="lblVoucherStatus" text="Generating code..." textFill="#66c0f4" />
+                              <HBox fx:id="hboxVoucherCode" alignment="CENTER" spacing="10.0" visible="false">
+                                 <children>
+                                    <TextField fx:id="txtVoucherCodeDisplay" editable="false" prefWidth="300.0" style="-fx-background-color: #0c0f12; -fx-text-fill: #75b022; -fx-font-family: monospace;" />
+                                    <Button onAction="#handleCopyVoucher" style="-fx-background-color: #66c0f4; -fx-text-fill: #171a21;" text="COPY" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+
+                  <VBox spacing="20.0" style="-fx-background-color: #171a21; -fx-background-radius: 8;" HBox.hgrow="ALWAYS">
+                     <padding><Insets bottom="25.0" left="25.0" right="25.0" top="20.0" /></padding>
+                     <children>
+                        <Label text="REDEEM VOUCHER" textFill="WHITE">
+                           <font><Font name="System Bold" size="18.0" /></font>
+                        </Label>
+                        <Label text="Enter your voucher code below:" textFill="#a1a1a1" />
+                        <TextField fx:id="txtRedeemCode" promptText="XXXX-XXXX-XXXX-XXXX" style="-fx-background-color: #2a475e; -fx-text-fill: white;" />
+                        <Button onAction="#handleRedeem" maxWidth="1.7976931348623157E308" style="-fx-background-color: linear-gradient(to bottom, #66c0f4, #4e8ab3); -fx-text-fill: white;" text="REDEEM CODE">
+                           <font><Font name="System Bold" size="14.0" /></font>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

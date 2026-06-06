@@ -12,105 +12,123 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: #1b2838;" stylesheets="@../styles/global.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.GameDetailController">
-   
-   <top>
-      <HBox alignment="CENTER_LEFT" prefHeight="50.0" style="-fx-background-color: #171a21;" BorderPane.alignment="CENTER">
+<BorderPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #1b2838;" stylesheets="@../styles/global.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.GameDetailController">
+   <left>
+      <VBox prefWidth="220.0" spacing="15.0" style="-fx-background-color: #171a21;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnBack" mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: #2a475e; -fx-text-fill: white;" text="← Kembali ke Dashboard">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
+            <Label text="STEAM CLONE" textFill="#66c0f4">
+               <font><Font name="System Bold" size="22.0" /></font>
+               <VBox.margin><Insets bottom="20.0" /></VBox.margin>
+            </Label>
+            <Button onAction="#handleBack" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #c7d5e0;" text="Store">
+               <graphic><FontIcon iconLiteral="fas-shopping-cart" iconColor="#c7d5e0" /></graphic>
+               <font><Font size="14.0" /></font>
+            </Button>
+            <Button onAction="#goToLibrary" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #c7d5e0;" text="Library">
+               <graphic><FontIcon iconLiteral="fas-book" iconColor="#c7d5e0" /></graphic>
+               <font><Font size="14.0" /></font>
+            </Button>
+            <Button onAction="#goToProfile" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #c7d5e0;" text="Profile">
+               <graphic><FontIcon iconLiteral="fas-user" iconColor="#c7d5e0" /></graphic>
+               <font><Font size="14.0" /></font>
+            </Button>
+            <Button onAction="#goToWallet" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #c7d5e0;" text="Wallet">
+               <graphic><FontIcon iconLiteral="fas-wallet" iconColor="#c7d5e0" /></graphic>
+               <font><Font size="14.0" /></font>
+            </Button>
+            <VBox VBox.vgrow="ALWAYS" />
+            <Button onAction="#handleLogout" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #a32a2a; -fx-text-fill: white;" text="Logout">
+               <graphic><FontIcon iconLiteral="fas-sign-out-alt" iconColor="WHITE" /></graphic>
             </Button>
          </children>
-         <padding>
-            <Insets left="20.0" />
-         </padding>
-      </HBox>
-   </top>
+         <padding><Insets bottom="20.0" left="15.0" right="15.0" top="30.0" /></padding>
+      </VBox>
+   </left>
 
    <center>
       <ScrollPane fitToWidth="true" style="-fx-background: transparent; -fx-background-color: transparent;" BorderPane.alignment="CENTER">
          <content>
             <VBox spacing="25.0">
-               <padding>
-                  <Insets bottom="30.0" left="30.0" right="30.0" top="20.0" />
-               </padding>
-               
+               <padding><Insets bottom="30.0" left="30.0" right="30.0" top="20.0" /></padding>
                <children>
-                  <VBox spacing="5.0">
+                  <HBox alignment="CENTER_LEFT" spacing="15.0">
                      <children>
-                        <Label text="Apex Legends™" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="32.0" />
-                           </font>
-                        </Label>
-                        <Label text="Action, Free to Play, Battle Royale, Shooter" textFill="#66c0f4" />
+                        <VBox HBox.hgrow="ALWAYS">
+                           <children>
+                              <Button onAction="#handleBack" style="-fx-background-color: transparent; -fx-text-fill: #66c0f4; -fx-cursor: hand;" text="Back to Store">
+                                 <font><Font name="System Bold" size="12.0" /></font>
+                                 <VBox.margin><Insets bottom="10.0" /></VBox.margin>
+                                 <graphic><FontIcon iconLiteral="fas-arrow-left" iconColor="#66c0f4" /></graphic>
+                              </Button>
+                              <Label fx:id="lblGameTitle" text="Game Title" textFill="WHITE">
+                                 <font><Font name="System Bold" size="32.0" /></font>
+                              </Label>
+                              <Label fx:id="lblCategory" text="Category" textFill="#66c0f4" />
+                           </children>
+                        </VBox>
+                        <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                           <children>
+                              <VBox alignment="CENTER_RIGHT">
+                                 <children>
+                                    <Label fx:id="lblUsername" text="User" textFill="WHITE">
+                                       <font><Font name="System Bold" size="14.0" /></font>
+                                    </Label>
+                                    <Label fx:id="lblWalletBalance" text="Balance: Rp 0" textFill="#66c0f4">
+                                       <font><Font size="12.0" /></font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <ImageView fx:id="imgNavAvatar" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/default_avatar.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
                      </children>
-                  </VBox>
+                  </HBox>
 
                   <HBox spacing="25.0">
                      <children>
-                        <ImageView fitHeight="260.0" fitWidth="480.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/apex_banner.png" />
-                           </image>
-                        </ImageView>
+                        <ImageView fx:id="imgBanner" fitHeight="260.0" fitWidth="480.0" pickOnBounds="true" preserveRatio="true" />
                         
                         <VBox alignment="CENTER_LEFT" prefHeight="260.0" prefWidth="380.0" spacing="15.0" style="-fx-background-color: #171a21; -fx-background-radius: 8;" HBox.hgrow="ALWAYS">
-                           <padding>
-                              <Insets bottom="20.0" left="25.0" right="25.0" top="20.0" />
-                           </padding>
+                           <padding><Insets bottom="20.0" left="25.0" right="25.0" top="20.0" /></padding>
                            <children>
-                              <Label text="Beli Apex Legends™" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
+                              <Label fx:id="lblActionTitle" text="Get Game" textFill="WHITE">
+                                 <font><Font name="System Bold" size="18.0" /></font>
                               </Label>
-                              
                               <HBox alignment="CENTER_LEFT" spacing="15.0" style="-fx-background-color: #0c0f12; -fx-background-radius: 4;">
                                  <children>
-                                    <Label prefHeight="40.0" text="Free to Play" textFill="WHITE" HBox.hgrow="ALWAYS">
-                                       <font>
-                                          <Font name="System Bold" size="16.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets left="15.0" />
-                                       </padding>
+                                    <Label fx:id="lblPrice" prefHeight="40.0" text="Free to Play" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                       <font><Font name="System Bold" size="16.0" /></font>
+                                       <padding><Insets left="15.0" /></padding>
                                     </Label>
-                                    <VBox alignment="CENTER" prefHeight="40.0" style="-fx-background-color: transparent;">
+                                    <VBox alignment="CENTER" prefHeight="40.0">
                                        <children>
-                                          <Button fx:id="btnPlay" mnemonicParsing="false" onAction="#handlePlayGame" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: linear-gradient(to bottom, #75b022, #588a1b); -fx-text-fill: white;" text="▶ PLAY">
-                                             <font>
-                                                <Font name="System Bold" size="14.0" />
-                                             </font>
+                                          <Button fx:id="btnAction" onAction="#handleAction" prefHeight="32.0" prefWidth="150.0" style="-fx-background-color: linear-gradient(to bottom, #75b022, #588a1b); -fx-text-fill: white;" text="BUY NOW">
+                                             <graphic><FontIcon iconLiteral="fas-play" iconColor="WHITE" /></graphic>
+                                             <font><Font name="System Bold" size="14.0" /></font>
                                           </Button>
                                        </children>
-                                       <padding>
-                                          <Insets right="10.0" />
-                                       </padding>
+                                       <padding><Insets right="10.0" /></padding>
                                     </VBox>
                                  </children>
                               </HBox>
-                              
-                              <Label text="Gunakan tombol di atas untuk langsung meluncurkan game Apex Legends yang terinstall di PC Anda via Steam Client logic." textFill="#a1a1a1" wrapText="true" />
+                              <Label fx:id="lblDescription" text="Game description goes here..." textFill="#a1a1a1" wrapText="true" />
                            </children>
                         </VBox>
                      </children>
                   </HBox>
 
                   <VBox spacing="10.0" style="-fx-background-color: #171a21; -fx-background-radius: 6;">
-                     <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="15.0" />
-                     </padding>
+                     <padding><Insets bottom="20.0" left="20.0" right="20.0" top="15.0" /></padding>
                      <children>
                         <Label text="System Requirements" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
+                           <font><Font name="System Bold" size="18.0" /></font>
                         </Label>
-                        
                         <GridPane hgap="25.0" vgap="10.0">
                            <children>
                               <VBox spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
@@ -118,24 +136,19 @@
                                     <Label text="MINIMUM:" textFill="#66c0f4">
                                        <font><Font name="System Bold" size="12.0" /></font>
                                     </Label>
-                                    <Label text="• OS: Windows 7 64-bit" textFill="#c7d5e0" />
-                                    <Label text="• CPU: AMD FX-4350 / Intel Core i3-6300" textFill="#c7d5e0" />
-                                    <Label text="• RAM: 6 GB RAM" textFill="#c7d5e0" />
-                                    <Label text="• GPU: AMD Radeon HD 7730 / NVIDIA GTX 640" textFill="#c7d5e0" />
-                                    <Label text="• Storage: 75 GB available space" textFill="#c7d5e0" />
+                                    <Label text="• OS: Windows 10 64-bit" textFill="#c7d5e0" />
+                                    <Label text="• RAM: 8 GB RAM" textFill="#c7d5e0" />
+                                    <Label text="• Storage: 50 GB available space" textFill="#c7d5e0" />
                                  </children>
                               </VBox>
-                              
                               <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
                                  <children>
                                     <Label text="RECOMMENDED:" textFill="#66c0f4">
                                        <font><Font name="System Bold" size="12.0" /></font>
                                     </Label>
-                                    <Label text="• OS: Windows 10 64-bit" textFill="#c7d5e0" />
-                                    <Label text="• CPU: Ryzen 5 CPU / Intel Core i5 3570K" textFill="#c7d5e0" />
-                                    <Label text="• RAM: 8 GB RAM" textFill="#c7d5e0" />
-                                    <Label text="• GPU: AMD Radeon R9 290 / NVIDIA GTX 970" textFill="#c7d5e0" />
-                                    <Label text="• Storage: 75 GB available space" textFill="#c7d5e0" />
+                                    <Label text="• OS: Windows 11 64-bit" textFill="#c7d5e0" />
+                                    <Label text="• RAM: 16 GB RAM" textFill="#c7d5e0" />
+                                    <Label text="• Storage: 50 GB SSD" textFill="#c7d5e0" />
                                  </children>
                               </VBox>
                            </children>
@@ -146,51 +159,26 @@
                   <VBox spacing="15.0">
                      <children>
                         <Label text="Customer Reviews" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
+                           <font><Font name="System Bold" size="18.0" /></font>
                         </Label>
-                        
                         <VBox spacing="5.0" style="-fx-background-color: #202329; -fx-background-radius: 4;">
-                           <padding>
-                              <Insets bottom="12.0" left="15.0" right="15.0" top="12.0" />
-                           </padding>
+                           <padding><Insets bottom="12.0" left="15.0" right="15.0" top="12.0" /></padding>
                            <children>
                               <HBox alignment="CENTER_LEFT" spacing="10.0">
                                  <children>
                                     <Label style="-fx-background-color: #66c0f4; -fx-text-fill: #171a21; -fx-background-radius: 2;" text=" 👍 RECOMMENDED ">
                                        <font><Font name="System Bold" size="10.0" /></font>
                                     </Label>
-                                    <Label text="Kausar_Mizan" textFill="WHITE">
+                                    <Label text="SteamUser_1" textFill="WHITE">
                                        <font><Font name="System Bold" size="12.0" /></font>
                                     </Label>
                                  </children>
                               </HBox>
-                              <Label text="Game battle royale terbaik, movement-nya lincah banget! Mantap dimainin bareng tim." textFill="#c7d5e0" wrapText="true" />
-                           </children>
-                        </VBox>
-                        
-                        <VBox spacing="5.0" style="-fx-background-color: #202329; -fx-background-radius: 4;">
-                           <padding>
-                              <Insets bottom="12.0" left="15.0" right="15.0" top="12.0" />
-                           </padding>
-                           <children>
-                              <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                 <children>
-                                    <Label style="-fx-background-color: #66c0f4; -fx-text-fill: #171a21; -fx-background-radius: 2;" text=" 👍 RECOMMENDED ">
-                                       <font><Font name="System Bold" size="10.0" /></font>
-                                    </Label>
-                                    <Label text="Haikal_Akbar" textFill="WHITE">
-                                        <font><Font name="System Bold" size="12.0" /></font>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <Label text="Grafiknya keren, pilihan Legend-nya variatif banget. Kadang dapet server agak lag tapi gameplay menutupi semuanya." textFill="#c7d5e0" wrapText="true" />
+                              <Label text="Great game, highly recommended!" textFill="#c7d5e0" wrapText="true" />
                            </children>
                         </VBox>
                      </children>
                   </VBox>
-
                </children>
             </VBox>
          </content>

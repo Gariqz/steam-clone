@@ -14,7 +14,12 @@ public class SceneNavigator {
         primaryStage = stage;
     }
 
-    // Fungsi statis yang bisa dipanggil dari Controller mana saja untuk switch page
+    public static void setFullScreen(boolean value) {
+        if (primaryStage != null) {
+            primaryStage.setFullScreen(value);
+        }
+    }
+
     public static void switchTo(String fxmlPath, String title, double width, double height) {
         try {
             Parent root = FXMLLoader.load(SceneNavigator.class.getResource(fxmlPath));

@@ -25,55 +25,58 @@ public class LoginController {
         String username = txtUsername.getText();
         String password = txtPassword.getText();
 
-        // Validasi input kosong (UX dasar)
         if (username.isEmpty() || password.isEmpty()) {
             showAlert(Alert.AlertType.WARNING, "Peringatan", "Username dan Password tidak boleh kosong!");
             return;
         }
 
         try {
-            // 1. Buka Koneksi
             Connection kon = DatabaseConnection.getConnection();
             if (kon == null) {
                 showAlert(Alert.AlertType.ERROR, "Koneksi Error", "Gagal menyambung ke database sistem.");
                 return;
             }
 
-            // 2. Siapkan Peluru Query
-            String query = "SELECT * FROM user WHERE username = ? AND password = ?";
+            // Gunakan tabel 'users' sesuai skema terbaru
+            String query = "SELECT * FROM users WHERE username = ? AND password = ?";
             PreparedStatement ps = kon.prepareStatement(query);
             
-            // 3. Masukkan Data ke Titik Tanya (?)
             ps.setString(1, username);
             ps.setString(2, password);
 
-            // 4. Tarik Pelatuknya
             ResultSet rs = ps.executeQuery();
 
-            // 5. Cek Hasilnya
             if (rs.next()) {
-                // Tarik data email dari database sekadar buat contoh
-                String emailUser = rs.getString("email");
+                // Simpan user ke SessionManager
+                models.User loggedInUser = new models.User(
+                    rs.getInt("id"),
+                    rs.getString("username"),
+                    rs.getString("email"),
+                    rs.getDouble("wallet_balance"),
+                    rs.getString("avatar_url"),
+                    rs.getString("profile_bg_url")
+                );
+                utils.SessionManager.loginUser(loggedInUser);
+
+                showAlert(Alert.AlertType.INFORMATION, "Login Success", "Welcome back, " + username + "!");
                 
-                // Pop-up ini akan menahan thread sebentar sampai user klik "OK"
-                showAlert(Alert.AlertType.INFORMATION, "Login Sukses", 
-                        "Selamat datang kembali, " + username + "!\nEmail: " + emailUser);
+                // Set to Full Screen after successful login
+                SceneNavigator.setFullScreen(true);
                 
-                // 6. EKSEKUSI PINDAH KE DASHBOARD
-                // Arahkan ke file FXML Dashboard abang (sesuaikan ukurannya ke 950x600 biar pas)
-                SceneNavigator.switchTo("/views/Dashboard.fxml", "Steam Clone - Dashboard", 950, 600);
+                // Pindah ke Dashboard
+                SceneNavigator.switchTo("/views/Dashboard.fxml", "Steam Clone - Dashboard", 1280, 720);
                 
             } else {
                 showAlert(Alert.AlertType.ERROR, "Login Gagal", "Username atau Password yang Anda masukkan salah!");
             }
 
-            // Bagian menutup resource SQL (Good Practice)
             rs.close();
             ps.close();
             kon.close();
 
         } catch (Exception e) {
             showAlert(Alert.AlertType.ERROR, "System Error", "Terjadi kesalahan: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
