@@ -97,7 +97,7 @@ public class LibraryController implements Initializable {
     private VBox createGameCard(Game game) {
         VBox card = new VBox(8);
         card.setPadding(new Insets(10));
-        card.setStyle("-fx-background-color: #171a21; -fx-background-radius: 5;");
+        card.setStyle("-fx-background-color: #3b3a63; -fx-background-radius: 5;");
         card.setPrefWidth(220);
 
         ImageView iv = new ImageView();
@@ -105,7 +105,7 @@ public class LibraryController implements Initializable {
             URL res = getClass().getResource("/images/" + game.getCoverUrl());
             if (res != null) iv.setImage(new Image(res.toExternalForm()));
         } catch (Exception e) {}
-        iv.setFitWidth(200); iv.setFitHeight(120); iv.setPreserveRatio(true);
+        iv.setFitWidth(200); iv.setFitHeight(120); iv.setPreserveRatio(false);
 
         Label title = new Label(game.getTitle());
         title.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14;");
@@ -125,7 +125,7 @@ public class LibraryController implements Initializable {
             actions.getChildren().addAll(btnPlay, btnUninstall);
         } else {
             Button btnInstall = new Button("INSTALL");
-            btnInstall.setStyle("-fx-background-color: #2a475e; -fx-text-fill: white; -fx-font-weight: bold;");
+            btnInstall.setStyle("-fx-background-color: #3b3a63; -fx-text-fill: white; -fx-font-weight: bold;");
             btnInstall.setOnAction(e -> handleInstall(game));
             actions.getChildren().add(btnInstall);
         }

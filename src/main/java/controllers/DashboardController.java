@@ -103,7 +103,7 @@ public class DashboardController implements Initializable {
     private VBox createGameCard(Game game) {
         VBox card = new VBox(5);
         card.setPadding(new Insets(10));
-        card.setStyle("-fx-background-color: #171a21; -fx-background-radius: 5; -fx-cursor: hand;");
+        card.setStyle("-fx-background-color: #3b3a63; -fx-background-radius: 5; -fx-cursor: hand;");
         card.setPrefWidth(200);
 
         ImageView iv = new ImageView();
@@ -111,11 +111,11 @@ public class DashboardController implements Initializable {
             URL res = getClass().getResource("/images/" + game.getCoverUrl());
             if (res != null) iv.setImage(new Image(res.toExternalForm()));
         } catch (Exception e) {}
-        iv.setFitWidth(180); iv.setFitHeight(110); iv.setPreserveRatio(true);
+        iv.setFitWidth(180); iv.setFitHeight(110); iv.setPreserveRatio(false);
 
         Label title = new Label(game.getTitle());
         title.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14;");
-        
+
         HBox priceBox = new HBox(10);
         if (ownedGameIds.contains(game.getId())) {
             Label owned = new Label("OWNED");
@@ -124,7 +124,7 @@ public class DashboardController implements Initializable {
         } else {
             String priceText = game.getPrice() == 0 ? "Free to Play" : "Rp " + String.format("%,.0f", game.getPrice());
             Label price = new Label(priceText);
-            price.setStyle("-fx-text-fill: #66c0f4;");
+            price.setStyle("-fx-text-fill: #FFFFFF;");
             priceBox.getChildren().add(price);
         }
 

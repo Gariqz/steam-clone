@@ -1,0 +1,14 @@
+/Users/ghassanariq/steam-clone/src/main/java/Main.java
+/Users/ghassanariq/steam-clone/src/main/java/utils/DatabaseConnection.java
+/Users/ghassanariq/steam-clone/src/main/java/utils/SessionManager.java
+/Users/ghassanariq/steam-clone/src/main/java/controllers/DashboardController.java
+/Users/ghassanariq/steam-clone/src/main/java/controllers/ProfileController.java
+/Users/ghassanariq/steam-clone/src/main/java/controllers/WalletController.java
+/Users/ghassanariq/steam-clone/src/main/java/models/Game.java
+/Users/ghassanariq/steam-clone/src/main/java/controllers/LoginController.java
+/Users/ghassanariq/steam-clone/src/main/java/utils/SceneNavigator.java
+/Users/ghassanariq/steam-clone/src/main/java/models/Wallet.java
+/Users/ghassanariq/steam-clone/src/main/java/models/User.java
+/Users/ghassanariq/steam-clone/src/main/java/controllers/LibraryController.java
+/Users/ghassanariq/steam-clone/src/main/java/controllers/GameDetailController.java
+/Users/ghassanariq/steam-clone/src/main/java/Launcher.java

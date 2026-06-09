@@ -1,5 +1,6 @@
 package controllers;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -58,13 +59,16 @@ public class LoginController {
                 );
                 utils.SessionManager.loginUser(loggedInUser);
 
-                showAlert(Alert.AlertType.INFORMATION, "Login Success", "Welcome back, " + username + "!");
+                // showAlert is blocking, better to switch scene then show welcome message or vice versa
+                // But let's try to ensure navigation happens.
                 
-                // Set to Full Screen after successful login
-                SceneNavigator.setFullScreen(true);
-                
-                // Pindah ke Dashboard
-                SceneNavigator.switchTo("/views/Dashboard.fxml", "Steam Clone - Dashboard", 1280, 720);
+                Platform.runLater(() -> {
+                    // Pindah ke Dashboard
+                    SceneNavigator.switchTo("/views/Dashboard.fxml", "Steam Clone - Dashboard", 1280, 720);
+                    
+                    // Set to Full Screen after scene switch
+                    SceneNavigator.setFullScreen(true);
+                });
                 
             } else {
                 showAlert(Alert.AlertType.ERROR, "Login Gagal", "Username atau Password yang Anda masukkan salah!");

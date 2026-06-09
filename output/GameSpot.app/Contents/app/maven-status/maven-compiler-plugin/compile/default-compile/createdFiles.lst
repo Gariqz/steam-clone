@@ -1,0 +1,16 @@
+controllers/GameDetailController.class
+models/User.class
+controllers/DashboardController.class
+controllers/LoginController.class
+controllers/LibraryController$1.class
+utils/SceneNavigator.class
+utils/DatabaseConnection.class
+controllers/WalletController.class
+utils/SessionManager.class
+controllers/ProfileController.class
+Wallet.class
+Main.class
+controllers/WalletController$1.class
+controllers/LibraryController.class
+models/Game.class
+Launcher.class
