@@ -17,7 +17,7 @@
    <left>
       <VBox prefWidth="220.0" spacing="15.0" style="-fx-background-color: #22213D;" BorderPane.alignment="CENTER">
          <children>
-            <Label text="STEAM CLONE" textFill="#FFFFFF">
+            <Label text="GroundZone" textFill="#FFFFFF">
                <font><Font name="System Bold" size="22.0" /></font>
                <VBox.margin><Insets bottom="20.0" /></VBox.margin>
             </Label>
