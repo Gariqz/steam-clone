@@ -1,19 +1,19 @@
 package controllers;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.ImageView; // Pastikan di-import kalau SceneNavigator beda package
 import javafx.scene.layout.StackPane;
 import utils.DatabaseConnection;
-import utils.SceneNavigator; // Pastikan di-import kalau SceneNavigator beda package
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import utils.SceneNavigator;
 
 public class LoginController {
 
@@ -54,11 +54,13 @@ public class LoginController {
                 return;
             }
 
+            String hashedPassword = utils.PasswordHasher.hashSHA256(password);
+
             String query = "SELECT * FROM users WHERE username = ? AND password = ?";
             PreparedStatement ps = kon.prepareStatement(query);
             
             ps.setString(1, username);
-            ps.setString(2, password);
+            ps.setString(2, hashedPassword);
 
             ResultSet rs = ps.executeQuery();
 

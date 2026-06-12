@@ -1,5 +1,9 @@
 package controllers;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -9,10 +13,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import utils.DatabaseConnection;
 import utils.SceneNavigator;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 public class RegisterController {
 
@@ -97,7 +97,10 @@ public class RegisterController {
             try (PreparedStatement psInsert = conn.prepareStatement(insertSql)) {
                 psInsert.setString(1, username);
                 psInsert.setString(2, email);
-                psInsert.setString(3, password);
+
+                String hashedPassword = utils.PasswordHasher.hashSHA256(password);
+                psInsert.setString(3, hashedPassword);
+
                 psInsert.setDouble(4, 0.0);
                 psInsert.setString(5, "animated_avatar.gif");
                 psInsert.setString(6, "");
