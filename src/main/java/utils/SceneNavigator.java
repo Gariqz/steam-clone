@@ -10,7 +10,6 @@ import java.net.URL;
 public class SceneNavigator {
     private static Stage primaryStage;
 
-    // Dipanggil sekali di Main.java saat start
     public static void setPrimaryStage(Stage stage) {
         primaryStage = stage;
     }
@@ -23,12 +22,10 @@ public class SceneNavigator {
 
     public static void switchTo(String fxmlPath, String title, double width, double height) {
         try {
-            // Ensure path starts with / for absolute resource loading
             String standardizedPath = fxmlPath.startsWith("/") ? fxmlPath : "/" + fxmlPath;
             URL fxmlUrl = SceneNavigator.class.getResource(standardizedPath);
             
             if (fxmlUrl == null) {
-                // Fallback to simpler loading if first attempt fails
                 fxmlUrl = SceneNavigator.class.getClassLoader().getResource(standardizedPath.substring(1));
             }
 
@@ -37,18 +34,27 @@ public class SceneNavigator {
             }
             
             Parent root = FXMLLoader.load(fxmlUrl);
-            Scene scene = new Scene(root, width, height);
+            Scene currentScene = primaryStage.getScene();
+            
+            if (currentScene != null) {
+                currentScene.setRoot(root);
+                
+                if (!primaryStage.isMaximized() && !primaryStage.isFullScreen()) {
+                    primaryStage.setWidth(width);
+                    primaryStage.setHeight(height);
+                    primaryStage.centerOnScreen();
+                }
+            } else {
+                Scene scene = new Scene(root, width, height);
+                primaryStage.setScene(scene);
+            }
             
             primaryStage.setTitle(title);
-            primaryStage.setScene(scene);
-            
-            primaryStage.centerOnScreen(); 
             primaryStage.show();
         } catch (IOException e) {
             System.err.println("CRITICAL: Gagal memuat halaman: " + fxmlPath);
             e.printStackTrace();
             
-            // Extract the deepest cause for better error reporting
             Throwable cause = e;
             while (cause.getCause() != null && cause.getCause() != cause) {
                 cause = cause.getCause();

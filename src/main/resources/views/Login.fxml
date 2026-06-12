@@ -1,21 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="600.0" prefWidth="800.0" spacing="20.0" stylesheets="@../styles/global.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
+<StackPane fx:id="rootPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@../styles/global.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
    <children>
-      <Label styleClass="text-primary" text="Login to Steam">
-         <font>
-            <Font name="Verdana" size="26.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txtUsername" maxWidth="250.0" prefHeight="35.0" promptText="Username" styleClass="text-secondary" />
-      <PasswordField fx:id="txtPassword" maxWidth="250.0" prefHeight="35.0" promptText="Password" styleClass="text-secondary" />
-      <Button mnemonicParsing="false" onAction="#handleLoginBtn" prefHeight="35.0" prefWidth="100.0" styleClass="btn-primary" text="LOGIN" />
+      <ImageView fx:id="bgImageView" fitHeight="600.0" fitWidth="800.0" preserveRatio="false">
+         <image>
+            <Image url="@../images/bg_anaqi.png" />
+         </image>
+         <effect>
+            <GaussianBlur radius="18.0" />
+         </effect>
+      </ImageView>
+
+      <Region style="-fx-background-color: rgba(0, 0, 0, 0.3);" />
+
+      <VBox alignment="CENTER" maxHeight="380.0" maxWidth="380.0" spacing="20.0" styleClass="login-card" StackPane.alignment="CENTER">
+         <children>
+            <Label styleClass="login-title" text="Login to GroundZone" />
+
+            <TextField fx:id="txtUsername" promptText="Username..." styleClass="login-field" />
+
+            <PasswordField fx:id="txtPassword" promptText="Password..." styleClass="login-field" />
+
+            <Button mnemonicParsing="false" onAction="#handleLoginBtn" styleClass="login-btn" text="Login" />
+
+            <HBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <Label styleClass="login-label-gray" text="Don't have an account?" />
+                  <Hyperlink onAction="#handleShowRegister" styleClass="login-link" text="Register" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
    </children>
-</VBox>
+</StackPane>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane fx:id="rootPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@../styles/global.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RegisterController">
+   <children>
+      <ImageView fx:id="bgImageView" fitHeight="600.0" fitWidth="800.0" preserveRatio="false">
+         <image>
+            <Image url="@../images/bg_anaqi.png" />
+         </image>
+         <effect>
+            <GaussianBlur radius="18.0" />
+         </effect>
+      </ImageView>
+      
+      <Region style="-fx-background-color: rgba(0, 0, 0, 0.3);" />
+      
+      <VBox alignment="CENTER" maxHeight="460.0" maxWidth="380.0" spacing="15.0" styleClass="login-card" StackPane.alignment="CENTER">
+         <children>
+            <Label styleClass="login-title" text="Register to GroundZone" />
+            
+            <TextField fx:id="txtUsername" promptText="Username" styleClass="login-field" />
+            
+            <TextField fx:id="txtEmail" promptText="Email" styleClass="login-field" />
+            
+            <PasswordField fx:id="txtPassword" promptText="Enter Password" styleClass="login-field" />
+            
+            <PasswordField fx:id="txtReenterPassword" promptText="Re-enter Password" styleClass="login-field" />
+            
+            <Button mnemonicParsing="false" onAction="#handleRegisterBtn" styleClass="login-btn" text="Register" />
+            
+            <HBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <Label styleClass="login-label-gray" text="Already have an account?" />
+                  <Hyperlink onAction="#handleShowLogin" styleClass="login-link" text="Login" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</StackPane>

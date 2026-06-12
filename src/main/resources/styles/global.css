@@ -72,3 +72,73 @@
 .scroll-bar .thumb:hover {
     -fx-background-color: derive(-fx-primary-color, 30%);
 }
+
+/* login */
+.login-card {
+    -fx-background-color: #2b303c;
+    -fx-background-radius: 15px;
+    -fx-padding: 40px;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 15, 0.2, 0, 8);
+}
+
+.login-title {
+    -fx-text-fill: white;
+    -fx-font-family: "Inter", "Roboto", "Segoe UI", sans-serif;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 10px 0;
+}
+
+.login-field {
+    -fx-background-color: white;
+    -fx-background-radius: 5px;
+    -fx-text-fill: #2b303c;
+    -fx-prompt-text-fill: #888888;
+    -fx-pref-height: 38px;
+    -fx-pref-width: 280px;
+    -fx-padding: 0 12px;
+    -fx-font-size: 14px;
+    -fx-border-color: transparent;
+}
+
+.login-field:focused {
+    -fx-border-color: #7c4dff;
+    -fx-border-radius: 5px;
+    -fx-background-color: #fbfbfb;
+}
+
+.login-btn {
+    -fx-background-color: white;
+    -fx-text-fill: #2b303c;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5px;
+    -fx-pref-width: 100px;
+    -fx-pref-height: 35px;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+}
+
+.login-btn:hover {
+    -fx-background-color: #e2e8f0;
+}
+
+.login-label-gray {
+    -fx-text-fill: #b0b3b8;
+    -fx-font-size: 12px;
+}
+
+.login-link {
+    -fx-text-fill: #8f75ff;
+    -fx-underline: false;
+    -fx-font-size: 12px;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-cursor: hand;
+}
+
+.login-link:hover {
+    -fx-text-fill: #b39eff;
+    -fx-underline: true;
+}

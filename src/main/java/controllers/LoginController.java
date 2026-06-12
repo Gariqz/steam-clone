@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import utils.DatabaseConnection;
 import utils.SceneNavigator; // Pastikan di-import kalau SceneNavigator beda package
 
@@ -16,10 +18,24 @@ import java.sql.ResultSet;
 public class LoginController {
 
     @FXML
+    private StackPane rootPane;
+
+    @FXML
+    private ImageView bgImageView;
+
+    @FXML
     private TextField txtUsername;
 
     @FXML
     private PasswordField txtPassword;
+
+    @FXML
+    private void initialize() {
+        if (rootPane != null && bgImageView != null) {
+            bgImageView.fitWidthProperty().bind(rootPane.widthProperty());
+            bgImageView.fitHeightProperty().bind(rootPane.heightProperty());
+        }
+    }
 
     @FXML
     private void handleLoginBtn(ActionEvent event) {
@@ -38,7 +54,6 @@ public class LoginController {
                 return;
             }
 
-            // Gunakan tabel 'users' sesuai skema terbaru
             String query = "SELECT * FROM users WHERE username = ? AND password = ?";
             PreparedStatement ps = kon.prepareStatement(query);
             
@@ -48,7 +63,6 @@ public class LoginController {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                // Simpan user ke SessionManager
                 models.User loggedInUser = new models.User(
                     rs.getInt("id"),
                     rs.getString("username"),
@@ -59,14 +73,8 @@ public class LoginController {
                 );
                 utils.SessionManager.loginUser(loggedInUser);
 
-                // showAlert is blocking, better to switch scene then show welcome message or vice versa
-                // But let's try to ensure navigation happens.
-                
                 Platform.runLater(() -> {
-                    // Pindah ke Dashboard
                     SceneNavigator.switchTo("/views/Dashboard.fxml", "Steam Clone - Dashboard", 1280, 720);
-                    
-                    // Set to Full Screen after scene switch
                     SceneNavigator.setFullScreen(true);
                 });
                 
@@ -84,12 +92,16 @@ public class LoginController {
         }
     }
 
-    // Method helper untuk mempersingkat penulisan pop-up Alert
+    @FXML
+    private void handleShowRegister(ActionEvent event) {
+        SceneNavigator.switchTo("/views/Register.fxml", "Steam Clone - Register", 800, 600);
+    }
+
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
-        alert.showAndWait(); // Menunggu sampai user klik tombol OK/Close
+        alert.showAndWait();
     }
 }
