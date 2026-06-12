@@ -17,7 +17,7 @@
    <children>
       <ImageView fx:id="bgImageView" fitHeight="600.0" fitWidth="800.0" preserveRatio="false">
          <image>
-            <Image url="@../images/bg_anaqi.png" />
+            <Image url="@../images/backgrounds/bg_anaqi.png" />
          </image>
          <effect>
             <GaussianBlur radius="18.0" />

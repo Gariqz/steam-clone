@@ -50,7 +50,7 @@ public class WalletController implements Initializable {
             lblWalletBalance.setText("Balance: Rp " + String.format("%,.0f", user.getWalletBalance()));
 
             try {
-                URL res = getClass().getResource("/images/" + user.getAvatarUrl());
+                URL res = getClass().getResource("/images/avatars/" + user.getAvatarUrl());
                 if (res != null) {
                     imgNavAvatar.setImage(new Image(res.toExternalForm()));
                     imgNavAvatar.setStyle("-fx-effect: dropshadow(three-pass-box, " + SessionManager.getStatusColor() + ", 10, 0.5, 0, 0);");

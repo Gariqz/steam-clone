@@ -23,6 +23,12 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ResourceBundle;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
+import javafx.scene.Node;
 
 public class ProfileController implements Initializable {
 
@@ -46,7 +52,6 @@ public class ProfileController implements Initializable {
             
             loadAvatar(user.getAvatarUrl());
 
-            // Default effect
             imgAvatar.setStyle("-fx-effect: dropshadow(three-pass-box, #75b022, 20, 0, 0, 0);");
         }
     }
@@ -57,7 +62,7 @@ public class ProfileController implements Initializable {
         lblWalletBalance.setText("Balance: Rp " + String.format("%,.0f", user.getWalletBalance()));
         
         try {
-            URL res = getClass().getResource("/images/" + user.getAvatarUrl());
+            URL res = getClass().getResource("/images/avatars/" + user.getAvatarUrl());
             if (res != null) {
                 imgNavAvatar.setImage(new Image(res.toExternalForm()));
             }
@@ -75,10 +80,8 @@ public class ProfileController implements Initializable {
         lblStatus.setText(statusText);
         lblStatus.setTextFill(javafx.scene.paint.Color.web(colorStr));
         
-        // Update Session for Global Navbar Aura
         SessionManager.setStatusColor(colorStr);
         
-        // Dynamic "Aura" effect
         imgAvatar.setStyle("-fx-effect: dropshadow(three-pass-box, " + colorStr + ", 25, 0.5, 0, 0);");
         imgNavAvatar.setStyle("-fx-effect: dropshadow(three-pass-box, " + colorStr + ", 10, 0.5, 0, 0);");
         
@@ -87,7 +90,7 @@ public class ProfileController implements Initializable {
 
     private void loadAvatar(String avatarFileName) {
         try {
-            URL res = getClass().getResource("/images/" + avatarFileName);
+            URL res = getClass().getResource("/images/avatars/" + avatarFileName);
             if (res != null) {
                 imgAvatar.setImage(new Image(res.toExternalForm()));
             }
@@ -114,6 +117,64 @@ public class ProfileController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Error", "Failed to update username.");
+        }
+    }
+
+    @FXML
+    private void handleChangeAvatar(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Profile Picture");
+        fileChooser.getExtensionFilters().addAll(
+            new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
+        );
+
+        Window window = ((Node) event.getSource()).getScene().getWindow();
+        File selectedFile = fileChooser.showOpenDialog(window);
+
+        if (selectedFile != null) {
+            User user = SessionManager.getCurrentUser();
+            if (user == null) return;
+
+            String originalName = selectedFile.getName();
+            String extension = "";
+            int dotIndex = originalName.lastIndexOf('.');
+            if (dotIndex > 0) {
+                extension = originalName.substring(dotIndex);
+            }
+            String newFileName = "avatar_" + user.getId() + "_" + System.currentTimeMillis() + extension;
+
+            File srcDest = new File("src/main/resources/images/avatars/" + newFileName);
+            File targetDest = new File("target/classes/images/avatars/" + newFileName);
+
+            try {
+                if (srcDest.getParentFile().exists()) {
+                    Files.copy(selectedFile.toPath(), srcDest.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                }
+                
+                if (targetDest.getParentFile().exists()) {
+                    Files.copy(selectedFile.toPath(), targetDest.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                }
+
+                try (Connection conn = DatabaseConnection.getConnection()) {
+                    String query = "UPDATE users SET avatar_url = ? WHERE id = ?";
+                    try (PreparedStatement ps = conn.prepareStatement(query)) {
+                        ps.setString(1, newFileName);
+                        ps.setInt(2, user.getId());
+                        ps.executeUpdate();
+                    }
+                }
+
+                user.setAvatarUrl(newFileName);
+
+                loadAvatar(newFileName);
+                updateNavbar();
+
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Profile picture updated successfully!");
+
+            } catch (Exception e) {
+                showAlert(Alert.AlertType.ERROR, "Error", "Failed to update profile picture: " + e.getMessage());
+                e.printStackTrace();
+            }
         }
     }
 

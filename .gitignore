@@ -10,3 +10,6 @@ target/
 # Mengabaikan file Java yang udah ter-compile otomatis
 *.class
 *.log
+
+# Mengabaikan folder output aplikasi
+output/

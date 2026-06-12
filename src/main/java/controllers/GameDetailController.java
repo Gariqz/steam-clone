@@ -53,7 +53,7 @@ public class GameDetailController implements Initializable {
             lblUsername.setText(user.getUsername());
             lblWalletBalance.setText("Balance: Rp " + String.format("%,.0f", user.getWalletBalance()));
             try {
-                URL res = getClass().getResource("/images/" + user.getAvatarUrl());
+                URL res = getClass().getResource("/images/avatars/" + user.getAvatarUrl());
                 if (res != null) {
                     imgNavAvatar.setImage(new Image(res.toExternalForm()));
                     imgNavAvatar.setStyle("-fx-effect: dropshadow(three-pass-box, " + SessionManager.getStatusColor() + ", 10, 0.5, 0, 0);");
@@ -70,7 +70,7 @@ public class GameDetailController implements Initializable {
         lblPrice.setText(priceText);
         lblActionTitle.setText("Get " + currentGame.getTitle());
         try {
-            URL res = getClass().getResource("/images/" + currentGame.getBannerUrl());
+            URL res = getClass().getResource("/images/games/" + currentGame.getBannerUrl());
             if (res != null) imgBanner.setImage(new Image(res.toExternalForm()));
         } catch (Exception e) {}
     }

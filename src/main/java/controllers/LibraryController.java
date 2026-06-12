@@ -53,7 +53,7 @@ public class LibraryController implements Initializable {
             lblUsername.setText(user.getUsername());
             lblWalletBalance.setText("Balance: Rp " + String.format("%,.0f", user.getWalletBalance()));
             try {
-                URL res = getClass().getResource("/images/" + user.getAvatarUrl());
+                URL res = getClass().getResource("/images/avatars/" + user.getAvatarUrl());
                 if (res != null) {
                     imgNavAvatar.setImage(new Image(res.toExternalForm()));
                     imgNavAvatar.setStyle("-fx-effect: dropshadow(three-pass-box, " + SessionManager.getStatusColor() + ", 10, 0.5, 0, 0);");
@@ -102,7 +102,7 @@ public class LibraryController implements Initializable {
 
         ImageView iv = new ImageView();
         try {
-            URL res = getClass().getResource("/images/" + game.getCoverUrl());
+            URL res = getClass().getResource("/images/games/" + game.getCoverUrl());
             if (res != null) iv.setImage(new Image(res.toExternalForm()));
         } catch (Exception e) {}
         iv.setFitWidth(200); iv.setFitHeight(120); iv.setPreserveRatio(false);

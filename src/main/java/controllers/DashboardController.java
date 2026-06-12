@@ -50,7 +50,7 @@ public class DashboardController implements Initializable {
             lblWalletBalance.setText("Balance: Rp " + String.format("%,.0f", user.getWalletBalance()));
             
             try {
-                URL res = getClass().getResource("/images/" + user.getAvatarUrl());
+                URL res = getClass().getResource("/images/avatars/" + user.getAvatarUrl());
                 if (res != null) {
                     imgNavAvatar.setImage(new Image(res.toExternalForm()));
                     // Apply interactive aura border
@@ -108,7 +108,7 @@ public class DashboardController implements Initializable {
 
         ImageView iv = new ImageView();
         try {
-            URL res = getClass().getResource("/images/" + game.getCoverUrl());
+            URL res = getClass().getResource("/images/games/" + game.getCoverUrl());
             if (res != null) iv.setImage(new Image(res.toExternalForm()));
         } catch (Exception e) {}
         iv.setFitWidth(180); iv.setFitHeight(110); iv.setPreserveRatio(false);
